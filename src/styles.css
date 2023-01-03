@@ -1,0 +1,149 @@
+ /* You can add global styles to this file, and also import other style files */
+ @import '~bootstrap/dist/css/bootstrap.min.css';
+
+ html,
+ body {
+     height: 100%;
+ }
+
+ .navbar {
+     background-color: #405061;
+     color: white;
+     text-align: justify;
+
+ }
+
+ .navbar-header {
+     margin-top: 15px;
+     margin-left: 5%;
+     justify-content: left !important;
+     cursor: pointer;
+ }
+
+ h3 {
+     color: black;
+     text-transform: capitalize;
+     text-decoration: underline;
+     text-shadow: #70c5c0;
+ }
+
+ /* .uploadFile {
+    text-decoration: double;
+    font-size: larger;
+} */
+
+ .selectFile {
+
+     justify-content: right;
+     margin-left: auto;
+ }
+
+ h1 {
+     color: aliceblue;
+ }
+
+ p {
+     color: aliceblue;
+ }
+
+ .slider {
+     width: auto;
+     height: 450px;
+ }
+
+ /* .jumboTron {
+    padding-top: 30px;
+    padding-right: 10px;
+    padding-left: 30px;
+    display: flex;
+    float: auto;
+    background-color: whitesmoke;
+} */
+
+ .pagination {
+     /* padding: 17px 17px; */
+     float: right;
+     font-size: 17px;
+ }
+
+ .pointer {
+     cursor: pointer;
+     margin-left: 10px;
+     color: black !important;
+     background-color: whitesmoke;
+ }
+
+ .columnColor {
+     background: #70c5c0;
+ }
+
+ .table_th {
+     background-color: #2199e8;
+ }
+
+ .odd {
+     background: whitesmoke
+ }
+
+ .table_td:hover {
+     background-color: lightgrey;
+ }
+
+
+ /* .avatar {
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    z-index: 9;
+    background: navajowhite;
+} */
+ .overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     right: 0;
+     bottom: 0;
+     z-index: 2;
+     backdrop-filter: blur(2px);
+ }
+
+ .menu-btn {
+     text-align: center;
+     width: auto;
+     font-weight: bolder;
+ }
+
+ .span {
+     color: red;
+     font-size: large
+ }
+
+ .row_headers {
+     background-color: rgb(33, 33, 33);
+     font-weight: bolder;
+     color: white;
+     text-align: center;
+     padding: 10px;
+     font-size: large;
+ }
+
+ .drpdown {
+     width: 250px;
+     height: 35px;
+ }
+
+ .row_data {
+     text-align: center;
+     padding: 0.5%;
+ }
+
+ .button_width {
+     width: 200px;
+     height: auto;
+
+ }

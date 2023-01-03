@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "webapp-amms": {
+      "hosting": {
+        "webapp-amms": [
+          "webapp-amms"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "webapp-amms"
+  }
+}

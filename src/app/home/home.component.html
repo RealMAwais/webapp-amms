@@ -1,0 +1,1167 @@
+<!-- /////////////////////////-----------------NAVBAR-----------------------////////////////// -->
+<nav class="navbar" style="padding: 2%;">
+    <div class="container-md" style="justify-content: center;">
+        <h1 class="navbar-header" [routerLink]="''">Building Management System</h1>
+        <p>©</p>
+    </div>
+</nav>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////// -->
+
+<div class="container-fluid">
+
+    <div class="row row_headers">
+        <div class="col-md-4">DATA FILES</div>
+        <div class="col-md-4">MAINTENANCE</div>
+        <div class="col-md-4">REPORTS</div>
+    </div>
+
+</div>
+
+<div class="container-fluid">
+
+    <div class="row row_data">
+        <div class="col-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#buildingModal">Add Building +</button>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-secondary button_width" [routerLink]="'building'">Edit Building</button>
+        </div>
+        <div class="col-4"><button class="btn btn-secondary button_width" [routerLink]="'lease-summary'">Lease
+                Summary</button></div>
+    </div>
+
+
+    <div class="row row_data">
+        <div class="col-sm-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#unitModal">Add Unit +</button></div>
+        <div class="col-sm-4"><button class="btn btn-secondary button_width">Monthly Rent</button></div>
+        <div class="col-lg-4"><button class="btn btn-secondary button_width" [routerLink]="'income-summary'">Income
+                Summary</button></div>
+
+    </div>
+
+    <div class="row row_data">
+
+        <div class="col-lg-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#leaseModal">Add Lease +</button></div>
+        <div class="col-md-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#taskModal">Add Task +</button></div>
+        <div class="col-md-4"><button class="btn btn-secondary button_width" [routerLink]="'expense-summary'">Expense
+                Summary</button></div>
+    </div>
+
+    <div class="row row_data">
+        <div class="col-md-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#companyModal">Add Company +</button></div>
+        <div class="col-lg-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#employeeModal">Add Employee +</button></div>
+        <div class="col-sm-4"><button class="btn btn-secondary button_width" [routerLink]="'rent-summary'">Rent/Dues
+                Summary</button></div>
+
+    </div>
+
+    <div class="row row_data">
+        <div class="col-xl-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#incomeModal">Add Income +</button></div>
+        <div class="col-xl-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#singleRentModal">Update Single Rent</button></div>
+    </div>
+
+    <div class="row row_data">
+        <div class="col-xl-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#expenseModal">Add Expense +</button></div>
+        <div class="col-xl-4"><button class="btn btn-secondary button_width">Alert Days</button></div>
+        <div class="col-xl-4"><button class="btn btn-primary "><svg xmlns="http://www.w3.org/2000/svg" width="26"
+                    height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                    <path
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2Zm13 2.383-4.708 2.825L15 11.105V5.383Zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741ZM1 11.105l4.708-2.897L1 5.383v5.722Z" />
+                </svg>Send Report</button></div>
+    </div>
+
+    <div class="row row_data">
+        <div class="col-xl-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#rentModal">Add Rent +</button></div>
+    </div>
+
+    <div class="row row_data">
+        <div class="col-xl-4"><button class="btn btn-secondary button_width" data-bs-toggle="modal"
+                data-bs-target="#deleteModal">Disable Lease</button></div>
+    </div>
+
+</div>
+<!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------------------- NEW BUILDING MODAL FORM DETAILS----------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="buildingModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Building
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetBuildingForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- New Building Modal Form Starts Here -->
+            <div class="modal-body">
+
+                <form [formGroup]="buildingDataForm">
+
+                    <div class="form-group mb-3">
+                        <label for="owner">Owner:<span class="span">*</span></label>
+                        <input type="text" class="form-control" id="owner" formControlName="owner" placeholder="Adam">
+                        <div *ngIf="fBuild.owner.touched && fBuild.owner.invalid" class="alert alert-danger">
+                            <div *ngIf="fBuild.owner.errors && fBuild.owner.errors.required">Name is Required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="adminCompany">Admin Company:<span class="span">*</span></label>
+                        <input type="text" class="form-control" id="adminCompany" formControlName="adminCompany">
+                        <div *ngIf="fBuild.adminCompany.touched && fBuild.adminCompany.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fBuild.adminCompany.errors && fBuild.adminCompany.errors.required">Field is
+                                Required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="propertyType">Property Type:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="propertyType">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of propertyOptions"> {{items.value | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fBuild.propertyType.touched && fBuild.propertyType.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fBuild.propertyType.errors && fBuild.propertyType.errors.required">
+                                <small>Select Property Type.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="address">Address:<span class="span">*</span></label>
+                        <input type="address" class="form-control" id="address" formControlName="address"
+                            placeholder="Enter Building Address">
+                        <div *ngIf="fBuild.address.touched && fBuild.address.invalid" class="alert alert-danger">
+                            <div *ngIf="fBuild.address.errors && fBuild.address.errors.required"><small>Enter Building
+                                    Name</small></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="city">City:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="city">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of cityOptions"> {{items.value | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fBuild.city.touched && fBuild.city.invalid" class="alert alert-danger">
+                            <div *ngIf="fBuild.city.errors && fBuild.city.errors.required"><small>Select a City.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="state">State:</label>
+                        <input type="text" class="form-control" formControlName="state">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="zip">ZIP Code:<span class="span">*</span></label>
+                        <input type="number" class="form-control" id="zip" formControlName="zip" placeholder="112233">
+                        <div *ngIf="fBuild.zip.touched && fBuild.zip.invalid" class="alert alert-danger">
+                            <div *ngIf="fBuild.zip.errors && fBuild.zip.errors.required">Field is Required.</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="wsh_dry">Washer_Dryer:&nbsp;</label>
+                        <input mdbCheckbox class="form-check-input" type="checkbox" id="wsh_dry"
+                            formControlName="wsh_dry">
+
+                        <label for="elevator">&nbsp; &nbsp; Elevator:&nbsp;</label>
+                        <input mdbCheckbox class="form-check-input" type="checkbox" id="elevator"
+                            formControlName="elevator">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="totalUnit">Total Units:</label>
+                        <input type="number" class="form-control" formControlName="totalUnit" placeholder="2">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="amount_fine">Amount Fine:</label>
+                        <input type="number" class="form-control" formControlName="amount_fine" placeholder="$20">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" formControlName="remarks">
+                    </div>
+
+                </form>
+            </div>
+
+
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-light" data-dismiss="modal"
+                    (click)="resetBuildingForm()">Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="addBuildingDataToFirestore()" [disabled]="buildingDataForm.invalid">Add
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-------------------------------------------------- UNIT DATA MODAL------------------------------------------------------------------>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="unitModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">
+                    Enter Unit Details</h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetUnitForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Unit Details Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="unitDataForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select"
+                            (change)="onBuildingDropDown($event)">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home" [value]="item.id"> {{item.address | uppercase}}
+                            </option>
+                        </select>
+                        <div *ngIf="fUnit.building.touched && fUnit.building.invalid" class="alert alert-danger">
+                            <div *ngIf="fUnit.building.errors && fUnit.building.errors.required">
+                                <small>Select a Building.</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="unitNo">Unit No:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="unitNo" placeholder="Enter Unit No">
+                        <div *ngIf="fUnit.unitNo.touched && fUnit.unitNo.invalid" class="alert alert-danger">
+                            <div *ngIf="fUnit.unitNo.errors && fUnit.unitNo.errors.required">
+                                <small>Enter Unit No.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="unitType">Unit Type:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="unitType">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of unitTypeOptions"> {{item.value | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fUnit.unitType.touched && fUnit.unitType.invalid" class="alert alert-danger">
+                            <div *ngIf="fUnit.unitType.errors && fUnit.unitType.errors.required">
+                                <small>Select Unit Type.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="beds">Beds:</label>
+                        <input type="number" class="form-control" formControlName="beds">
+
+                        <label for="baths">Baths:</label>
+                        <input type="number" class="form-control" formControlName="baths">
+
+
+                        <label for="floors">Floors:</label>
+                        <input type="number" class="form-control" formControlName="floors">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rent">Rent:</label>
+                        <input type="number" class="form-control" formControlName="rent" placeholder="$200">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="security">Security:</label>
+                        <input type="number" class="form-control" formControlName="security" placeholder="$100">
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetUnitForm()">Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addUnitDataToFirestore()"
+                    [disabled]="unitDataForm.invalid">
+                    Add Details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!-------------------------------------------------- COMPANY MODAL-------------------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="companyModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Company
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetCompanyForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Company Details Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="companyForm">
+
+                    <div class="form-group mb-3">
+                        <label for="companyName">Company Name:</label>
+                        <input type="text" class="form-control" formControlName="companyName"
+                            placeholder="Enter Company Name">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="state">State:</label>
+                        <input type="text" class="form-control" formControlName="state">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="city">City:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="city">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of cityOptions"> {{items.value | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fCompany.city.touched && fCompany.city.invalid" class="alert alert-danger">
+                            <div *ngIf="fCompany.city.errors && fCompany.city.errors.required"><small>Select a
+                                    City.</small></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="address">Address:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="address">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="companyType">Company Type:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="companyType">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of companyTypeOptions"> {{items.value | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fCompany.companyType.touched && fCompany.companyType.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fCompany.companyType.errors && fCompany.companyType.errors.required"><small>
+                                    Select Company Type.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="zip">ZIP Code:</label>
+                        <input type="number" class="form-control" formControlName="zip">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone:</label>
+                        <input type="number" class="form-control" formControlName="phone">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="mobile">Mobile:<span class="span">*</span></label>
+                        <input type="number" class="form-control" formControlName="mobile" placeholder="(917) 111-0000"
+                            minlength="7">
+                        <div *ngIf="fCompany.mobile.touched && fCompany.mobile.invalid" class="alert alert-danger">
+                            <div *ngIf="fCompany.mobile.errors && fCompany.mobile.errors.required">Enter Mobile No.
+                            </div>
+                            <div *ngIf="fCompany.mobile.errors?.minlength"> Enter Valid Mobile No. </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group mb-3">
+                        <label for="email">Email:<span class="span">*</span></label>
+                        <input type="email" class="form-control" formControlName="email"
+                            placeholder="adam@minhasmanagement.com">
+                        <div *ngIf="fCompany.email.touched && fCompany.email.invalid" class="alert alert-danger">
+                            <div *ngIf="fCompany.email.errors && fCompany.email.errors.required"> Email is required.
+                            </div>
+                            <div *ngIf="fCompany.email.errors && fCompany.email.errors.pattern"> Please Enter valid
+                                email address.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetCompanyForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addCompanytoFirestore()"
+                    [disabled]="companyForm.invalid"> Add
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- LEASE DATA ENTRY MODAL-------------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="leaseModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Lease
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetLeaseForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Lease Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="leaseForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select"
+                            (change)="onBuildingDropDown($event)">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home" [value]="item.address"> {{item.address |
+                                uppercase}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="unitNo">Select Unit No:</label>
+                        <select class="drpdown" formControlName="unitNo" (click)="unitOptionsforLease()">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of unitOptionsArray"> {{item.unitNo}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="firstName">First Name:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                        <div *ngIf="fLease.firstName.touched && fLease.firstName.invalid" class="alert alert-danger">
+                            <div *ngIf="fLease.firstName.errors && fLease.firstName.errors.required">
+                                <small>Enter First Name.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="lastName">Last Name:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <div *ngIf="fLease.lastName.touched && fLease.lastName.invalid" class="alert alert-danger">
+                            <div *ngIf="fLease.lastName.errors && fLease.lastName.errors.required">
+                                <small>Enter Last Name.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="socialSecurity">Social Security No:</label>
+                        <input type="text" class="form-control" formControlName="socialSecurity">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="phone">Phone:</label>
+                        <input type="number" class="form-control" formControlName="phone">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="mobile">Mobile:<span class="span">*</span></label>
+                        <input type="number" class="form-control" formControlName="mobile" placeholder="(917) 111-0000"
+                            minlength="7">
+
+                        <div *ngIf="fLease.mobile.touched && fLease.mobile.invalid" class="alert alert-danger">
+                            <div *ngIf="fLease.mobile.errors && fLease.mobile.errors.required">Enter Mobile No.</div>
+                            <div *ngIf="fLease.mobile.errors?.minlength"> Enter Valid Mobile No. </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="email">Email:<span class="span">*</span></label>
+                        <input type="email" class="form-control" formControlName="email"
+                            placeholder="adam@minhasmanagement.com">
+                        <div *ngIf="fLease.email.touched && fLease.email.invalid" class="alert alert-danger">
+                            <div *ngIf="fLease.email.errors && fLease.email.errors.required"> Email is required.</div>
+                            <div *ngIf="fLease.email.errors && fLease.email.errors.pattern">
+                                Please Enter valid email address.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="legalRent">Legal Rent:</label>
+                        <input type="number" class="form-control" formControlName="legalRent">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="prefRent">Pref Rent:</label>
+                        <input type="number" class="form-control" formControlName="prefRent">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="securityHeld">Security Held:</label>
+                        <input type="number" class="form-control" formControlName="securityHeld">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="leaseStartDate">Lease Start Date:</label>
+                        <input class="form-control" type="date" formControlName="leaseStartDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="leaseEndDate">Lease End Date:</label>
+                        <input class="form-control" type="date" formControlName="leaseEndDate">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" formControlName="remarks">
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetLeaseForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addLeasetoFirestore()"
+                    [disabled]="leaseForm.invalid"> Add
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- INCOME DATA ENTRY MODAL------------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="incomeModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Income
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetIncomeForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Lease Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="incomeForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="incomeType">Income Type:</label>
+                        <select class="drpdown" formControlName="incomeType">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of incomeTypeOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="amount">Income Amount:</label>
+                        <input type="number" class="form-control" formControlName="amount" placeholder="$200">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="dateOfIncome">Date of Income:</label>
+                        <input class="form-control" type="date" formControlName="dateOfIncome">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" formControlName="remarks">
+                    </div>
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetIncomeForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addIncometoFirestore()">
+                    Add Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- EXPENSE DATA ENTRY MODAL------------------------------------------------------------>
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="expenseModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Expense
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetExpenseForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Expense Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="expenseForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home"> {{item.address | uppercase}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="expenseType">Expense Type:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="expenseType">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of expenseTypeOptions"> {{items.value}} </option>
+                        </select>
+                        <div *ngIf="fExpense.expenseType.touched && fExpense.expenseType.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fExpense.expenseType.errors && fExpense.expenseType.errors.required">
+                                <small>Select an Expense
+                                    Type.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="amountDue">Amount Due:</label>
+                        <input type="number" class="form-control" formControlName="amountDue" placeholder="$200">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="amountPaid">Amount Paid:</label>
+                        <input type="number" class="form-control" formControlName="amountPaid" placeholder="$100">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="dueDate">Due Date:</label>
+                        <input class="form-control" type="date" formControlName="dueDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="datePaid">Date Paid:</label>
+                        <input class="form-control" type="date" formControlName="datePaid">
+                    </div>
+
+
+                    <div class="form-group mb-3">
+                        <label for="comments">Comments:</label>
+                        <input type="text" class="form-control" formControlName="comments">
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetExpenseForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addExpensetoFirestore()"
+                    [disabled]="expenseForm.invalid"> Add Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- TASK DATA ENTRY MODAL--------------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Task
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetTaskForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Task Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="taskForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home"> {{item.address | uppercase}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="taskType">Task Type:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="taskType">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of taskTypeOptions"> {{items.value}} </option>
+                        </select>
+                        <div *ngIf="fTask.taskType.touched && fTask.taskType.invalid" class="alert alert-danger">
+                            <div *ngIf="fTask.taskType.errors && fTask.taskType.errors.required"><small>Select Task
+                                    Type.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="unitNo">Unit No:</label>
+                        <select class="drpdown" formControlName="unitNo">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of unitNoOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="taskStartDate">Task Start Date:</label>
+                        <input class="form-control" type="date" formControlName="taskStartDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="taskEndDate">Task End Date:</label>
+                        <input class="form-control" type="date" formControlName="taskEndDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="taskStatus">Task Status:</label>
+                        <select class="drpdown" formControlName="taskStatus">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of taskStatusOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="taskDescription">Task Description:</label>
+                        <input type="text" class="form-control" formControlName="taskDescription">
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetTaskForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitTaskForm()"
+                    [disabled]="taskForm.invalid"> Add Details </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- EMPLOYEE DATA ENTRY MODAL----------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Employee
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetEmployeeForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Lease Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="employeeForm">
+
+                    <div class="form-group mb-3">
+                        <label for="firstName">First Name:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="firstName">
+                        <div *ngIf="fEmployee.firstName.touched && fEmployee.firstName.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fEmployee.firstName.errors && fEmployee.firstName.errors.required"><small>Enter
+                                    First
+                                    Name.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="lastName">Last Name:<span class="span">*</span></label>
+                        <input type="text" class="form-control" formControlName="lastName">
+                        <div *ngIf="fEmployee.lastName.touched && fEmployee.lastName.invalid"
+                            class="alert alert-danger">
+                            <div *ngIf="fEmployee.lastName.errors && fEmployee.lastName.errors.required"><small>Enter
+                                    Last
+                                    Name.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="salary">Salary:</label>
+                        <input type="number" class="form-control" formControlName="salary" placeholder="$4000">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="employementStartDate">Employement Start Date:</label>
+                        <input class="form-control" type="date" formControlName="employementStartDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="employementEndDate">Employement End Date:</label>
+                        <input class="form-control" type="date" formControlName="employementEndDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home"> {{item.address | uppercase}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="remarks">Remarks:</label>
+                        <input type="text" class="form-control" formControlName="remarks">
+                    </div>
+
+
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetEmployeeForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitEmployeeForm()"
+                    [disabled]="employeeForm.invalid"> Add
+                    Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- RENT DATA ENTRY MODAL--------------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="rentModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Rent
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetRentForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Rent Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="rentForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select"
+                            (change)="onBuildingDropDown($event)">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home" [value]="item.address"> {{item.address |
+                                uppercase}}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="tenantName">Tenant Name:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="tenantName" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_lease"> {{item.unitNo}} - {{item.firstName |
+                                uppercase}} {{item.lastName | uppercase}} </option>
+                        </select>
+                        <div *ngIf="fRent.tenantName.touched && fRent.tenantName.invalid" class="alert alert-danger">
+                            <div *ngIf="fRent.tenantName.errors && fRent.tenantName.errors.required"><small>Enter
+                                    Tenant Name.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label for="leaseID">Lease ID:<span class="span">*</span></label>
+                        <select class="drpdown" formControlName="leaseID" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_lease"> {{item.id}} </option>
+                        </select>
+                        <div *ngIf="fRent.leaseID.touched && fRent.leaseID.invalid" class="alert alert-danger">
+                            <div *ngIf="fRent.leaseID.errors && fRent.leaseID.errors.required"><small>Enter
+                                    Lease ID.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="month">Month:</label>
+                        <input class="form-control" type="month" formControlName="month">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="year">Year:</label>
+                        <select class="drpdown" formControlName="year">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of yearOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="unitNo">Select Unit No:</label>
+                        <select class="drpdown" formControlName="unitNo" (click)="unitOptionsforLease()">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of unitOptionsArray"> {{item.unitNo}} </option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label for="previousBalance">Previous Balance:</label>
+                        <input type="number" class="form-control" formControlName="previousBalance" placeholder="$500">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rentDueDate">Rent Due Date:</label>
+                        <input class="form-control" type="date" formControlName="rentDueDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rent">Rent:</label>
+                        <input type="number" class="form-control" formControlName="rent" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="charges">Charges:</label>
+                        <input type="number" class="form-control" formControlName="charges" placeholder="$1">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="managementFee">Managemenet Fee:</label>
+                        <input type="number" class="form-control" formControlName="managementFee" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="internetFee">Internet Fee:</label>
+                        <input type="number" class="form-control" formControlName="internetFee" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="garageFee">Garage Fee:</label>
+                        <input type="number" class="form-control" formControlName="garageFee" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="storageSpaceFee">Storage Space Fee:</label>
+                        <input type="number" class="form-control" formControlName="storageSpaceFee" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="antennaFee">Antenna Fee:</label>
+                        <input type="number" class="form-control" formControlName="antennaFee" placeholder="$">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="paidRent">Paid Rent:</label>
+                        <input type="number" class="form-control" formControlName="paidRent" placeholder="$550">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="datePaid">Date Paid:</label>
+                        <input class="form-control" type="date" formControlName="datePaid">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="bankName">Bank Name:</label>
+                        <input class="form-control" type="text" formControlName="bankName">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="chequeNo">Cheque No:</label>
+                        <input class="form-control" type="text" formControlName="chequeNo">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="comments">Comments:</label>
+                        <input type="text" class="form-control" formControlName="comments">
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetRentForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addRenttoFirestore()"
+                    [disabled]="rentForm.invalid"> Add Rent Details</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<!----------------------------------------------- SINGLE RENT DATA ENTRY MODAL-------------------------------------------------------->
+<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+<div class="modal fade" id="singleRentModal" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle" style="text-decoration: underline;">Enter Single
+                    Rent
+                    Details
+                </h2>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="resetSingleRentForm();"
+                    aria-label="Close"></button>
+            </div>
+            <!-- Single Rent Data Entry Modal Form Starts Here -->
+            <div class="modal-body">
+                <form [formGroup]="singleRentForm">
+
+                    <div class="form-group col-md-6">
+                        <label for="building">Select Building Name:</label>
+                        <select class="drpdown" formControlName="building" aria-label="select">
+                            <option> Select an option</option>
+                            <option *ngFor="let item of localArray_home"> {{item.address | uppercase}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="tenantName">Tenant Name:</label>
+                        <input type="text" class="form-control" formControlName="tenantName">
+                        <small>Enter Tenant Name.</small>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="leaseID">Select Lease ID:</label>
+                        <select class="drpdown" formControlName="leaseID">
+                            <option> Select an option</option>
+                            <!-- <option *ngFor="let items of "> {{items.id}} </option> -->
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="month">Month:</label>
+                        <input class="form-control" type="month" formControlName="month">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="year">Year:</label>
+                        <select class="drpdown" formControlName="year">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of yearOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="unitNo">Unit No:</label>
+                        <select class="drpdown" formControlName="unitNo">
+                            <option> Select an option</option>
+                            <option *ngFor="let items of unitNoOptions"> {{items.value}} </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="previousBalance">Previous Balance:</label>
+                        <input type="number" class="form-control" formControlName="previousBalance" placeholder="$500">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rentDueDate">Rent Due Date:</label>
+                        <input class="form-control" type="date" formControlName="rentDueDate">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="rent">Rent:</label>
+                        <input type="number" class="form-control" formControlName="rent" placeholder="$500">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="charges">Charges:</label>
+                        <input type="number" class="form-control" formControlName="charges" placeholder="$100">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="discount">Discount:</label>
+                        <input type="number" class="form-control" formControlName="discount" placeholder="$50">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="paidRent">Paid Rent:</label>
+                        <input type="number" class="form-control" formControlName="paidRent" placeholder="$550">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="datePaid">Date Paid:</label>
+                        <input class="form-control" type="date" formControlName="datePaid">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="bankName">Bank Name:</label>
+                        <input class="form-control" type="text" formControlName="bankName">
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="chequeNo">Cheque No:</label>
+                        <input class="form-control" type="text" formControlName="chequeNo">
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="comments">Comments:</label>
+                        <input type="text" class="form-control" formControlName="comments">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="clear" class="btn btn-secondary" data-dismiss="modal"
+                    (click)="resetSingleRentForm()">
+                    Reset</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="submitSingleRentForm()"
+                    [disabled]="singleRentForm.invalid"> Add Details</button>
+            </div>
+        </div>
+    </div>
+</div>
